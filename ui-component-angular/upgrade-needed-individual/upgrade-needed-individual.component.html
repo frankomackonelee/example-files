@@ -1,0 +1,139 @@
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-12 mt-0 mb-1 title-area">
+            <div style="min-height: 56px" class="y-center">
+                <h4 *ngIf="!freeTrialJustStarted" class="mb-0">Maths Kitchen Member Feature</h4>
+            </div>
+
+            <button type="button" class="close" aria-label="Close" (click)="closeClickCallback()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        
+        <ng-container *ngIf="isATeacher$ | async">
+            
+                <div class="mk-rounded-card p-3 mx-3">
+                    <div class="font-weight-bold px-3 text-center" style="font-size: 1.2rem;">
+                        A <a routerLink="/schools/pricing" class="teacher-action-text">School Subscription</a> will give your students all the Maths Kitchen Member benefits, as well as powerful homwork setting and diagnostics.
+                    </div>
+                    <div class="font-weight-bold px-3 text-center" style="font-size: 1.2rem;">
+                        You can even have a <span class="text-primary">free trial month</span> for your school to make sure it's right for you.
+                    </div>
+    
+                    <app-faq-answer [faq]="faq" isModalContext="true"></app-faq-answer>
+                </div>
+    
+                <div class="col-12 text-center py-3">
+                    <a routerLink="/schools/pricing"
+                        class="btn btn-primary quick-step-action-button">
+                        Find out More
+                    </a>
+                </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="!(isATeacher$ | async)">
+            <ng-container *ngIf="!freeTrialJustStarted" >
+
+                <div class="col-12 p-2 buttons-area">
+                    <ng-container *ngIf="abTestCase$ | async as situation">
+                        <ng-container *ngIf="situation === 'A'">
+                            <button 
+                                class="btn btn-primary btn-lg quick-step-action-button m-1"
+                                (click)="startAFreeTrial('Click Here to Unlock Your Free Trial')">
+                                Click to Unlock Your Free Trial
+                                <i aria-hidden="true" class="pl-1 fa fa-unlock"></i>
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="situation === 'B'">
+                            <a class="btn btn-info btn-lg quick-step-action-button m-1" (click)="goToUpgrade('Become a Member - £60')" routerLink="/user/pricing">
+                                Become a Member - £60
+                            </a>
+
+                            <button 
+                                class="btn btn-primary quick-step-action-button"
+                                (click)="startAFreeTrial('Start a FREE TRIAL!')">
+                                Start a FREE TRIAL!
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="situation == 'None'">
+                            <a class="btn btn-info btn-lg quick-step-action-button m-1" (click)="goToUpgrade('Become a Member - £60')" routerLink="/user/pricing">
+                                Become a Member - £60
+                            </a>
+    
+                            <button class="btn btn-locked btn-lg quick-step-action-button m-1">
+                                Start a FREE TRIAL!
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </button>
+                        </ng-container>
+                    </ng-container>
+
+                </div>
+    
+            
+                <div class="mk-rounded-card p-3 mx-3">
+                    <div class="font-weight-bold px-3 text-center" style="font-size: 1.2rem;">
+                        Maths Kitchen Members can access this feature and many others.
+                    </div>
+                    
+                    <div *ngIf="freeTrialOptionAvailable$ | async" class="font-weight-bold px-3 text-center" style="font-size: 1.2rem;">
+                        You can claim a FREE WEEK trial of full Memership.  Simply click the button to start your free trial!
+                    </div>
+    
+                    <app-faq-answer [faq]="faq" isModalContext="true"></app-faq-answer>
+                </div>
+    
+                <div class="col-12 text-center py-3">
+
+                    <ng-container *ngIf="abTestCase$ | async as situation">
+                        <ng-container *ngIf="situation === 'A'">
+                            <button 
+                                class="btn btn-primary btn-lg quick-step-action-button m-1"
+                                (click)="startAFreeTrial('Click Here to Unlock Your Free Trial')">
+                                Click to Unlock Your Free Trial
+                                <i aria-hidden="true" class="pl-1 fa fa-unlock"></i>
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="situation === 'B'">
+                            <button 
+                                class="btn btn-primary quick-step-action-button"
+                                (click)="startAFreeTrial('Start a FREE TRIAL!')">
+                                Start a FREE TRIAL!
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="situation == 'None'">
+                            <a class="btn btn-info btn-lg quick-step-action-button m-1" (click)="goToUpgrade('Become a Member - £60')" routerLink="/user/pricing">
+                                Become a Member - £60
+                            </a>
+                        </ng-container>
+                        
+                    </ng-container>
+                </div>
+            </ng-container>
+    
+            <ng-container *ngIf="freeTrialJustStarted" >        
+                <div class="col-12 px-3">
+                    <div class="mk-rounded-card p-3 my-3">
+                        <div class="x-y-center">
+                            <img style="width: 40%" src="assets/images/maths-kitchen-logo.svg" alt="maths-kitchen-logo" />
+                        </div>
+                        <h3 style="font-size: 1.5rem; display: flex; flex-direction: row; align-items: center; justify-content: space-around;">Your Free Trial Has Started!<i class="fa fa-check-circle fa-lg text-primary" aria-hidden="true"></i></h3>
+                        <div>You have a week to try out all the benefits of Maths Kitchen Membership for free</div>
+                        <div>Check your inbox for tips and suggestions about all the features so you can make the most of them</div>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+
+
+
+    </div>
+
+</div>
